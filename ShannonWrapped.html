@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khai & Shannon: 5 Years Together</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #d4c5b9 0%, #a89f91 100%);
+            color: #3d3530;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide:nth-child(2) { animation-delay: 0.3s; }
+        .slide:nth-child(3) { animation-delay: 0.6s; }
+        .slide:nth-child(4) { animation-delay: 0.9s; }
+        .slide:nth-child(5) { animation-delay: 1.2s; }
+        .slide:nth-child(6) { animation-delay: 1.5s; }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            color: #5d4e37;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #6b5d4f;
+            font-weight: 400;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #7d6e5d;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .stat {
+            font-size: 4em;
+            font-weight: bold;
+            color: #8b7355;
+            margin: 20px 0;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 1.2em;
+            color: #6b5d4f;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 300;
+        }
+
+        .divider {
+            width: 80px;
+            height: 3px;
+            background: #a89f91;
+            margin: 30px auto;
+            border-radius: 2px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #c9b8a8 0%, #d4c5b9 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 4px solid #8b7355;
+        }
+
+        .highlight-title {
+            font-size: 1.4em;
+            color: #5d4e37;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .highlight-text {
+            font-size: 1.1em;
+            color: #6b5d4f;
+            line-height: 1.6;
+        }
+
+        .heart {
+            font-size: 3em;
+            color: #a0826d;
+            margin: 20px 0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 1.1em;
+            color: #7d6e5d;
+            font-style: italic;
+        }
+
+        .photo-upload {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(169, 159, 145, 0.2);
+            border-radius: 15px;
+            border: 2px dashed #a89f91;
+        }
+
+        .photo-upload input {
+            display: none;
+        }
+
+        .photo-upload label {
+            cursor: pointer;
+            padding: 15px 30px;
+            background: #8b7355;
+            color: white;
+            border-radius: 10px;
+            font-size: 1em;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+
+        .photo-upload label:hover {
+            background: #6b5d4f;
+        }
+
+        .photo-preview {
+            margin-top: 20px;
+            max-width: 100%;
+            max-height: 400px;
+            width: auto;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            display: none;
+            object-fit: contain;
+        }
+
+        .photo-preview.show {
+            display: block;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .photo-grid-item {
+            position: relative;
+        }
+
+        .photo-grid label {
+            cursor: pointer;
+            padding: 40px 20px;
+            background: rgba(169, 159, 145, 0.2);
+            border: 2px dashed #a89f91;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            color: #6b5d4f;
+            transition: background 0.3s;
+            min-height: 150px;
+        }
+
+        .photo-grid label:hover {
+            background: rgba(169, 159, 145, 0.3);
+        }
+
+        .photo-grid input {
+            display: none;
+        }
+
+        .photo-grid img {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: none;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .photo-grid img.show {
+            display: block;
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(61, 53, 48, 0.5);
+            font-size: 0.9em;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            h2 { font-size: 2em; }
+            .stat { font-size: 3em; }
+            .card { padding: 40px 30px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="slide">
+            <div class="card">
+                <h1>Khai & Shannon</h1>
+                <div class="divider"></div>
+                <p class="subtitle">Our Story: 2025 Wrapped</p>
+                <div class="heart">♥</div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="card">
+                <h2>5 Years Together</h2>
+                <div class="divider"></div>
+                <div class="stat">1,826</div>
+                <p class="stat-label">Days of Love</p>
+                <p class="subtitle" style="margin-top: 30px;">Since January 7, 2021</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="card">
+                <h2>Our Journey</h2>
+                <div class="divider"></div>
+                <div class="highlight">
+                    <div class="highlight-title">Together in Person</div>
+                    <div class="highlight-text">January 2021 - November 2022<br>22 beautiful months side by side</div>
+                </div>
+                <div class="highlight">
+                    <div class="highlight-title">Long Distance</div>
+                    <div class="highlight-text">November 2022 - Present<br>786 days (and counting) of staying strong</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="card">
+                <h2>By The Numbers</h2>
+                <div class="divider"></div>
+                <div class="photo-upload">
+                    <img src="images/first.jpg" class="photo-preview show" alt="Our Journey">
+                </div>
+                <div class="stat">26</div>
+                <p class="stat-label">Months Together</p>
+                <div class="stat" style="font-size: 3em; margin-top: 40px;">60</div>
+                <p class="stat-label">Months Total</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="card">
+                <h2>Visiting the States</h2>
+                <div class="divider"></div>
+                <p class="subtitle">When Shannon came to see me</p>
+                <div class="photo-grid">
+                    <div class="photo-grid-item">
+                         <img src="images/visit1.jpg" class="show" alt="Our Journey">
+                    </div>
+                    <div class="photo-grid-item">
+                        <img src="images/visit2.png" class="show" alt="Our Journey">
+                    </div>
+                    <div class="photo-grid-item">
+                        <img src="images/visit3.png" class="show" alt="Our Journey">
+                    </div>
+                    <div class="photo-grid-item">
+                        <img src="images/visit4.png" class="show" alt="Our Journey">
+                    </div>
+                    <div class="photo-grid-item">
+                        <img src="images/visit5.png" class="show" alt="Our Journey">
+                    </div>
+                    <div class="photo-grid-item">
+                        <img src="images/visit6.png" class="show" alt="Our Journey">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="card">
+                <h2>Happy 5th Anniversary</h2>
+                <div class="divider"></div>
+                <div class="photo-upload">
+                    <img src="images/third.png" class="photo-preview show" alt="Our Journey">
+                </div>
+                <p class="subtitle" style="font-size: 1.3em; line-height: 1.8; margin: 30px 0;">
+                    Hi babas, you've reached the end our wrapped! I thank you so much for being such a wonderful and supportive girlfriend. I know I haven't been the best boyfriend and we kept facing our ups and downs this year, but thank you for sticking by me. I'm really grateful to be by your side and watch you grow and support you the past year. It's our 5th year together and I hope we continue to grow as awesome people and a sweet and loving couple. I hope to make the trip to visit you soon this year and just know I love you so so so much, you're my everything.
+                </p>
+                <div class="heart">♥</div>
+                <p class="footer">January 7, 2026</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-indicator">Scroll down ↓</div>
+
+    <script>
+        // Photo upload functionality for single photos
+        for (let i = 1; i <= 3; i++) {
+            const input = document.getElementById(`photo${i}`);
+            const preview = document.getElementById(`preview${i}`);
+            
+            if (input && preview) {
+                input.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            preview.src = e.target.result;
+                            preview.classList.add('show');
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+        }
+
+        // Photo upload functionality for visit grid
+        for (let i = 1; i <= 6; i++) {
+            const input = document.getElementById(`visit${i}`);
+            const preview = document.getElementById(`visitPreview${i}`);
+            const label = input.nextElementSibling;
+            
+            input.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        preview.src = e.target.result;
+                        preview.classList.add('show');
+                        label.style.display = 'none';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // Hide scroll indicator after scrolling
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            const indicator = document.querySelector('.scroll-indicator');
+            if (window.scrollY > 100) {
+                indicator.style.opacity = '0';
+            } else {
+                indicator.style.opacity = '1';
+            }
+        });
+    </script>
+</body>
+</html>
